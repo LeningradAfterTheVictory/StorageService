@@ -129,7 +129,6 @@ public class StorageService {
                 fileUrls.add(fileUrl);
             }
 
-            // Устанавливаем продолжение списка
             request.setContinuationToken(result.getNextContinuationToken());
         } while (result.isTruncated());
 

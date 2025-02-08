@@ -1,0 +1,9 @@
+services:
+  java-app:
+    build: .
+    environment:
+      # Передача ключей S3 в контейнер
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    ports:
+      - "8081:8080"
