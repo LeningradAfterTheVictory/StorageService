@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.storageservice.application.services.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,10 +55,10 @@ public class FilesController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = List.class))),
             @ApiResponse(responseCode = "500", description = "Ошибка сервера при загрузке файлов", content = @Content)
     })
-    @PostMapping("/batch-upload")
+    @PostMapping(value = "/batch-upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<List<String>> uploadFiles(
             @Parameter(description = "Список файлов для загрузки", required = true)
-            @RequestParam("photos") List<MultipartFile> files) {
+            @RequestPart("photos") List<MultipartFile> files) {
         List<String> fileUrls = storageService.saveFiles(files);
         return ResponseEntity.ok(fileUrls);
     }
