@@ -1,11 +1,14 @@
 networks:
-  custom_network:
-    external: true  # Используем внешнюю сеть
+  my_custom_network:
+    name: my_custom_network
+    driver: bridge
 
 services:
   storage-service:
     build: .
+    environment:
+      SAGA_PORT: 5300
     ports:
       - "8081:8080"
     networks:
-      - custom_network
+      - my_custom_network
