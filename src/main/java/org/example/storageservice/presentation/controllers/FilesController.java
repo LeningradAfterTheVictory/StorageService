@@ -36,6 +36,7 @@ public class FilesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Файл успешно загружен",
                     content = @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "401", description = "Срок действия токена истек"),
             @ApiResponse(responseCode = "500", description = "Ошибка сервера при загрузке файла", content = @Content)
     })
     @PostMapping("/upload")
@@ -53,6 +54,7 @@ public class FilesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Файлы успешно загружены",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = List.class))),
+            @ApiResponse(responseCode = "401", description = "Срок действия токена истек"),
             @ApiResponse(responseCode = "500", description = "Ошибка сервера при загрузке файлов", content = @Content)
     })
     @PostMapping(value = "/batch-upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -71,6 +73,7 @@ public class FilesController {
             @ApiResponse(responseCode = "200", description = "Файл успешно удалён",
                     content = @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = "400", description = "Неверный URL файла", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Срок действия токена истек"),
             @ApiResponse(responseCode = "500", description = "Ошибка сервера при удалении файла", content = @Content)
     })
     @DeleteMapping("/delete")
@@ -89,6 +92,7 @@ public class FilesController {
             @ApiResponse(responseCode = "200", description = "Файлы успешно удалены",
                     content = @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = "400", description = "Неверные URL файлов", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Срок действия токена истек"),
             @ApiResponse(responseCode = "500", description = "Ошибка сервера при удалении файлов", content = @Content)
     })
     @DeleteMapping("/batch-delete")
